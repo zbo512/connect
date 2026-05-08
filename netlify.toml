@@ -1,0 +1,6 @@
+# Netlify 배포 설정
+# - build 명령 없음 (이미 index.html이 빌드된 결과물)
+# - publish 디렉토리: 루트 (index.html이 있는 곳)
+
+[build]
+  publish = "."
