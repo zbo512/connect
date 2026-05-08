@@ -39,18 +39,31 @@ function Build-Preview {
         "<script>`n$js`n</script>"
     )
 
-    # 5. ?mobile 모드 스크립트 삽입
+    # 5. Mobile/PC Adaptive Style & Script
     $mobileScript = @'
+<style>
+/* Auto Mobile View (for screens smaller than 768px) */
+@media (max-width: 767px) {
+  body { background:#fff !important; padding:0 !important; display:block !important; }
+  .shell { width:100% !important; margin:0 !important; }
+  .shell-label { display:none !important; }
+  .phone { background:none !important; border-radius:0 !important; padding:0 !important; box-shadow:none !important; }
+  .screen-wrap { border-radius:0 !important; height:100dvh !important; }
+  .status { display:none !important; }
+  .flowmap { display:none !important; }
+}
+</style>
 <script>
+/* Force Mobile View via ?mobile query string */
 if (location.search.includes('mobile')) {
   const s = document.createElement('style');
   s.textContent = `
-    body { background:#fff; padding:0; display:block; }
-    .shell { width:100%; }
-    .shell-label { display:none; }
-    .phone { background:none; border-radius:0; padding:0; box-shadow:none; }
-    .screen-wrap { border-radius:0; height:100dvh; }
-    .status { display:none; }
+    body { background:#fff !important; padding:0 !important; display:block !important; }
+    .shell { width:100% !important; margin:0 !important; }
+    .shell-label { display:none !important; }
+    .phone { background:none !important; border-radius:0 !important; padding:0 !important; box-shadow:none !important; }
+    .screen-wrap { border-radius:0 !important; height:100dvh !important; }
+    .status { display:none !important; }
     .flowmap { display:none !important; }
   `;
   document.head.appendChild(s);
