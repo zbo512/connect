@@ -3039,19 +3039,4 @@ document.addEventListener('input', function(e) {
 });
 
 </script>
-<script>
-if (location.search.includes('mobile')) {
-  const s = document.createElement('style');
-  s.textContent = `
-    body { background:#fff; padding:0; display:block; }
-    .shell { width:100%; }
-    .shell-label { display:none; }
-    .phone { background:none; border-radius:0; padding:0; box-shadow:none; }
-    .screen-wrap { border-radius:0; height:100dvh; }
-    .status { display:none; }
-    .flowmap { display:none !important; }
-  `;
-  document.head.appendChild(s);
-}
-</script>
 </body>
