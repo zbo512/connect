@@ -1,4 +1,7 @@
+﻿chcp 65001 | Out-Null
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+[Console]::InputEncoding  = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $enc  = [System.Text.Encoding]::UTF8
 
@@ -60,15 +63,15 @@ if (location.search.includes('mobile')) {
     # 6. preview.html 저장 (index.html은 소스 템플릿이므로 덮어쓰지 않음)
     #    Netlify는 _redirects 파일로 / → /preview.html 리다이렉트 처리
     [System.IO.File]::WriteAllText("$root\preview.html", $template, $enc)
-    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] preview.html 재생성 완료"
+    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] preview.html rebuilt"
 }
 
-# ── 초기 빌드 ─────────────────────────────────────────────────
-Write-Host "초기 빌드 중..."
+# -- Initial build
+Write-Host "Building..."
 Build-Preview
 
-# ── FileSystemWatcher 설정 ────────────────────────────────────
-# Changed + Renamed + Created 모두 감지 (VS Code는 rename 방식으로 저장)
+# -- FileSystemWatcher setup
+# Detects Changed + Renamed + Created (VS Code saves via rename)
 $watcher = New-Object System.IO.FileSystemWatcher($root)
 $watcher.IncludeSubdirectories = $true
 $watcher.Filter = "*.*"
@@ -78,7 +81,7 @@ $watcher.NotifyFilter = (
 )
 $watcher.EnableRaisingEvents = $true
 
-Write-Host "감시 중 — .html/.css/.js 저장 시 자동 재빌드 (Ctrl+C로 종료)"
+Write-Host "Watching -- auto-rebuild on .html/.css/.js save (Ctrl+C to stop)"
 Write-Host ""
 
 $lastBuild = [DateTime]::MinValue
@@ -96,17 +99,17 @@ while ($true) {
     $ext = [System.IO.Path]::GetExtension($name).ToLower()
     if ($ext -notin @('.html', '.css', '.js')) { continue }
 
-    # 빌드 결과물(preview.html)이 변경되면 무시 (무한루프 방지)
+    # Skip build output to prevent infinite loop
     if ($name -eq 'preview.html') { continue }
 
-    # 디바운스: 300ms 이내 중복 이벤트 무시
+    # Debounce: ignore duplicate events within 300ms
     $now = [DateTime]::Now
     if (($now - $lastBuild).TotalMilliseconds -lt 300) { continue }
     $lastBuild = $now
 
-    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] 변경 감지: $name"
+    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Changed: $name"
 
-    # VS Code rename 저장이 완전히 끝날 때까지 대기
+    # Wait for VS Code rename-save to complete
     Start-Sleep -Milliseconds 150
     Build-Preview
 }
