@@ -1,4 +1,4 @@
-﻿[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $enc  = [System.Text.Encoding]::UTF8
 
@@ -57,9 +57,11 @@ if (location.search.includes('mobile')) {
 '@
     $template = $template.Replace('</body>', $mobileScript)
 
-    # 6. preview.html 저장
+    # 6. preview.html + index.html 동시 저장
+    #    (Netlify 배포 시 index.html을 기준으로 서빙하기 때문)
     [System.IO.File]::WriteAllText("$root\preview.html", $template, $enc)
-    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] preview.html 재생성 완료"
+    [System.IO.File]::WriteAllText("$root\index.html", $template, $enc)
+    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] preview.html + index.html 재생성 완료"
 }
 
 # ── 초기 빌드 ─────────────────────────────────────────────────
@@ -95,8 +97,8 @@ while ($true) {
     $ext = [System.IO.Path]::GetExtension($name).ToLower()
     if ($ext -notin @('.html', '.css', '.js')) { continue }
 
-    # preview.html 자체가 변경되면 무시 (무한루프 방지)
-    if ($name -eq 'preview.html') { continue }
+    # 빌드 결과물(preview.html, index.html)이 변경되면 무시 (무한루프 방지)
+    if ($name -eq 'preview.html' -or $name -eq 'index.html') { continue }
 
     # 디바운스: 300ms 이내 중복 이벤트 무시
     $now = [DateTime]::Now
