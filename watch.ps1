@@ -1,4 +1,4 @@
-﻿chcp 65001 | Out-Null
+chcp 65001 | Out-Null
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Console]::InputEncoding  = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
@@ -6,7 +6,7 @@ $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $enc  = [System.Text.Encoding]::UTF8
 
 function Build-Preview {
-    $template = [System.IO.File]::ReadAllText("$root\index.html", $enc)
+    $template = [System.IO.File]::ReadAllText("$root\_template.html", $enc)
 
     # 1. base.css → <style> 인라인
     $css = [System.IO.File]::ReadAllText("$root\base.css", $enc)
@@ -60,10 +60,11 @@ if (location.search.includes('mobile')) {
 '@
     $template = $template.Replace('</body>', $mobileScript)
 
-    # 6. preview.html 저장 (index.html은 소스 템플릿이므로 덮어쓰지 않음)
-    #    Netlify는 _redirects 파일로 / → /preview.html 리다이렉트 처리
+    # 6. preview.html + index.html 동시 저장
+    #    preview.html: 로컬 확인용 / index.html: Netlify 서빙용
     [System.IO.File]::WriteAllText("$root\preview.html", $template, $enc)
-    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] preview.html rebuilt"
+    [System.IO.File]::WriteAllText("$root\index.html", $template, $enc)
+    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] preview.html + index.html rebuilt"
 }
 
 # -- Initial build
@@ -99,8 +100,8 @@ while ($true) {
     $ext = [System.IO.Path]::GetExtension($name).ToLower()
     if ($ext -notin @('.html', '.css', '.js')) { continue }
 
-    # Skip build output to prevent infinite loop
-    if ($name -eq 'preview.html') { continue }
+    # Skip build outputs to prevent infinite loop
+    if ($name -eq 'preview.html' -or $name -eq 'index.html') { continue }
 
     # Debounce: ignore duplicate events within 300ms
     $now = [DateTime]::Now

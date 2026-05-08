@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보험설계사 페이지 — 인터랙티브 프로토타입</title>
+<link href="https://cdn.jsdelivr.net/npm/pretendard@latest/dist/web/static/pretendard.css" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<!-- ═══ PHONE ═══ -->
+<div class="shell">
+  <div class="shell-label" id="shell-label">온보딩 1/4</div>
+  <div class="phone">
+    <div class="screen-wrap">
+      <div class="status"><span class="status-time">9:41</span><span class="status-r">●●● WiFi 🔋</span></div>
+
+      <!-- ─ 토스트 ─ -->
+      <div class="toast" id="toast"></div>
+
+      <!-- ═══ S1: 온보딩 1 — 환영 ═══ -->
+
+      <!--#include screens/onboarding.html -->
+
+      <!--#include screens/builder.html -->
+
+      <!--#include screens/customer.html -->
+
+      <!--#include screens/claim.html -->
+
+      <!--#include screens/notify.html -->
+
+      <!--#include screens/errors.html -->
+
+      <!-- ═══ #11a 보험조회 약관 동의 모달 ═══ -->
+      <div id="modal-ins" style="display:none;position:absolute;inset:0;z-index:50;display:none;flex-direction:column;justify-content:flex-end">
+        <!-- 딤 -->
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.45)" onclick="closeInsModal()"></div>
+        <!-- 바텀 시트 -->
+        <div style="position:relative;background:#fff;border-radius:20px 20px 0 0;padding:0 0 32px;max-height:88%;overflow-y:auto;scrollbar-width:none">
+          <!-- 핸들 -->
+          <div style="display:flex;justify-content:center;padding:12px 0 4px">
+            <div style="width:36px;height:4px;border-radius:2px;background:var(--gray-100)"></div>
+          </div>
+          <!-- 헤더 -->
+          <div style="padding:12px 20px 16px;border-bottom:.5px solid var(--border)">
+            <div style="font-size:17px;font-weight:700;color:var(--text-1)">보험 조회 서비스 이용 동의</div>
+            <div style="font-size:13px;color:var(--text-3);margin-top:4px">교보라이프플래닛 · 마이데이터 기반</div>
+          </div>
+          <!-- 서비스 안내 -->
+          <div style="padding:16px 20px;border-bottom:.5px solid var(--border)">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:12px;align-items:flex-start">
+                <div style="width:32px;height:32px;border-radius:8px;background:var(--blue-50);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🔍</div>
+                <div><div style="font-size:13px;font-weight:500;color:var(--text-1)">가입 보험 현황 조회</div><div style="font-size:12px;color:var(--text-3);margin-top:2px;line-height:1.5">전 금융사 보험 계약 정보를 한눈에 확인합니다</div></div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:flex-start">
+                <div style="width:32px;height:32px;border-radius:8px;background:var(--teal-50);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#3182F6" stroke-width="1.5" stroke-linecap="round"><path d="M4 14l4-4 3 3 5-6"/><rect x="2" y="2" width="16" height="16" rx="2"/></svg></div>
+                <div><div style="font-size:13px;font-weight:500;color:var(--text-1)">보장 갭 분석</div><div style="font-size:12px;color:var(--text-3);margin-top:2px;line-height:1.5">부족한 보장을 자동으로 분석해 드립니다</div></div>
+              </div>
+            </div>
+          </div>
+          <!-- 동의 항목 -->
+          <div style="padding:16px 20px;border-bottom:.5px solid var(--border);display:flex;flex-direction:column;gap:0">
+            <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:10px">동의 항목</div>
+            <div id="agree-all" style="display:flex;align-items:center;gap:10px;padding:10px 0;cursor:pointer;border-bottom:.5px solid var(--border);margin-bottom:4px" onclick="toggleAllAgree()">
+              <div id="chk-all" style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--gray-100);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s">
+                <svg width="10" height="8" viewBox="0 0 10 8" style="display:none" id="chk-all-icon"><path d="M1 4L3.5 6.5L9 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span style="font-size:14px;font-weight:600;color:var(--text-1)">전체 동의</span>
+            </div>
+            <div class="agree-item" onclick="toggleAgree('chk1')">
+              <div class="agree-chk" id="chk1"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div style="flex:1"><span style="font-size:13px;color:var(--text-1)">[필수] 개인정보 수집·이용 동의</span><span style="font-size:11px;color:var(--blue);margin-left:6px;cursor:pointer" onclick="event.stopPropagation();showToast('전문 보기 — 실제 앱에서 연결됩니다')">전문 보기</span></div>
+            </div>
+            <div class="agree-item" onclick="toggleAgree('chk2')">
+              <div class="agree-chk" id="chk2"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div style="flex:1"><span style="font-size:13px;color:var(--text-1)">[필수] 개인정보 제3자 제공 동의</span><span style="font-size:11px;color:var(--blue);margin-left:6px;cursor:pointer" onclick="event.stopPropagation();showToast('전문 보기 — 실제 앱에서 연결됩니다')">전문 보기</span></div>
+            </div>
+            <div class="agree-item" onclick="toggleAgree('chk3')">
+              <div class="agree-chk" id="chk3"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div style="flex:1"><span style="font-size:13px;color:var(--text-1)">[필수] 마이데이터 이용 동의</span><span style="font-size:11px;color:var(--blue);margin-left:6px;cursor:pointer" onclick="event.stopPropagation();showToast('전문 보기 — 실제 앱에서 연결됩니다')">전문 보기</span></div>
+            </div>
+            <div class="agree-item" onclick="toggleAgree('chk4')">
+              <div class="agree-chk" id="chk4"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div style="flex:1"><span style="font-size:13px;color:var(--text-1)">[선택] 마케팅 활용 동의</span></div>
+            </div>
+          </div>
+          <!-- 안내 문구 -->
+          <div style="padding:12px 20px;background:var(--gray-50);margin:0 20px;border-radius:var(--r-sm);margin-top:14px">
+            <div style="font-size:11px;color:var(--text-3);line-height:1.7">본 서비스는 교보라이프플래닛이 금융보안원 마이데이터 인프라를 통해 제공합니다. 동의 후 보험 정보를 조회하며, 동의 철회 시 데이터가 즉시 삭제됩니다.</div>
+          </div>
+          <!-- CTA -->
+          <div style="padding:16px 20px 0;display:flex;flex-direction:column;gap:10px">
+            <button id="agree-cta" class="btn-primary" style="opacity:.4;cursor:not-allowed" onclick="submitAgree()">동의하고 시작하기</button>
+            <button class="btn-ghost" onclick="closeInsModal()">취소</button>
+          </div>
+        </div>
+      </div>
+
+      <!--#include screens/workspace.html -->
+
+      <!--#include screens/onboarding.html --> <!-- s-terms -->
+
+      <!--#include screens/magazine.html -->
+
+      <!-- ═══ #10 모듈 추가 모달 (overlay) ═══ -->
+      <div id="modal-mod" style="display:none;position:absolute;inset:0;z-index:50;flex-direction:column;justify-content:flex-end">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.45)" onclick="closeModModal()"></div>
+        <div style="position:relative;background:#fff;border-radius:20px 20px 0 0;padding:0 0 28px">
+          <div style="display:flex;justify-content:center;padding:12px 0 4px"><div style="width:36px;height:4px;border-radius:2px;background:var(--gray-100)"></div></div>
+          <div style="padding:12px 20px 16px;border-bottom:.5px solid var(--border)">
+            <div style="font-size:17px;font-weight:700;color:var(--text-1)">모듈 추가</div>
+            <div style="font-size:13px;color:var(--text-3);margin-top:3px">자주 쓰는 모듈을 빠르게 추가해 보세요</div>
+          </div>
+          <div style="padding:16px 20px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div class="card" style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:12px" onclick="quickAdd('보험 가이드')">
+                <div style="width:32px;height:32px;border-radius:8px;background:var(--amber-50);display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 2.5h7.5L17 7v10.5a1 1 0 01-1 1H5a1 1 0 01-1-1v-15a1 1 0 011-1z" fill="#F7B731"/><path d="M12.5 2.5V7H17" fill="#E65100"/><path d="M7 10.5h6M7 13h4" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <div><div style="font-size:13px;font-weight:500;color:var(--text-1)">보험 가이드</div><div style="font-size:11px;color:var(--text-3)">콘텐츠</div></div>
+              </div>
+              <div class="card" style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:12px" onclick="quickAdd('매거진')">
+                <div style="width:32px;height:32px;border-radius:8px;background:var(--blue-50);display:flex;align-items:center;justify-content:center;font-size:16px">✍️</div>
+                <div><div style="font-size:13px;font-weight:500;color:var(--text-1)">매거진</div><div style="font-size:11px;color:var(--text-3)">콘텐츠</div></div>
+              </div>
+              <div class="card" style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:12px" onclick="quickAdd('이벤트 보상')">
+                <div style="width:32px;height:32px;border-radius:8px;background:#fce4ec;display:flex;align-items:center;justify-content:center;font-size:16px"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#F7B731" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="9" width="14" height="9" rx="1"/><path d="M3 9h14M10 9V18M10 9c0-2-3-4-3-2s3 2 3 2M10 9c0-2 3-4 3-2s-3 2-3 2"/></svg></div>
+                <div><div style="font-size:13px;font-weight:500;color:var(--text-1)">이벤트</div><div style="font-size:11px;color:var(--text-3)">관계</div></div>
+              </div>
+              <div class="card" style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:12px" onclick="quickAdd('데일리 뉴스')">
+                <div style="width:32px;height:32px;border-radius:8px;background:var(--gray-50);display:flex;align-items:center;justify-content:center;font-size:16px"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#0E9E6E" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></div>
+                <div><div style="font-size:13px;font-weight:500;color:var(--text-1)">뉴스</div><div style="font-size:11px;color:var(--text-3)">콘텐츠</div></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end screen-wrap -->
+  </div><!-- end phone -->
+</div><!-- end shell -->
+
+<!-- ═══ FLOW MAP ═══ -->
+<div class="flowmap">
+  <div class="flowmap-label">화면 흐름도</div>
+  <div class="flow-card">
+    <div class="flow-section">설계사 온보딩</div>
+    <div class="flow-item done" id="fi-ob1" onclick="go('s-ob1','온보딩 1/4','flow')"><div class="flow-num">1</div><div class="flow-name">정보 확인</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item done" id="fi-ob2" onclick="go('s-ob2','온보딩 2/4','flow')"><div class="flow-num">2</div><div class="flow-name">사진 업로드</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item done" id="fi-ob3" onclick="go('s-ob3','온보딩 3/4','flow')"><div class="flow-num">3</div><div class="flow-name">SNS 연결</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item done" id="fi-terms" onclick="go('s-terms','약관 동의','flow')"><div class="flow-num">4</div><div class="flow-name">#08 약관 동의</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item done" id="fi-ob4" onclick="go('s-ob4','온보딩 완료','flow')"><div class="flow-num">5</div><div class="flow-name">온보딩 완료</div></div>
+    <div class="flow-section">설계사 앱</div>
+    <div class="flow-item" id="fi-workspace" onclick="go('s-workspace','워크스페이스','flow')"><div class="flow-num">6</div><div class="flow-name">#01 워크스페이스 홈</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item" id="fi-builder" onclick="go('s-builder','빌더','flow')"><div class="flow-num">7</div><div class="flow-name">페이지 빌더</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item" id="fi-notify" onclick="go('s-notify','알림','flow')"><div class="flow-num">8</div><div class="flow-name">알림 센터</div></div>
+    <div class="flow-section">고객 페이지</div>
+    <div class="flow-item" id="fi-customer" onclick="go('s-customer','고객 페이지','flow')"><div class="flow-num">9</div><div class="flow-name">고객 페이지 C1~C4</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item" id="fi-magazine" onclick="go('s-magazine','콘텐츠','flow')"><div class="flow-num">10</div><div class="flow-name">#14·15 콘텐츠</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item" id="fi-claim" onclick="go('s-claim','청구','flow')"><div class="flow-num">11</div><div class="flow-name">청구 대행</div></div>
+    <div class="flow-section">빌더 에러 상태</div>
+    <div class="flow-item" id="fi-hr-fail" onclick="go('s-hr-fail','HR 동기화 실패','flow')"><div class="flow-num">12</div><div class="flow-name">#24 HR 동기화 실패</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item" id="fi-saas-warn" onclick="go('s-saas-warn','약관 미동의','flow')"><div class="flow-num">13</div><div class="flow-name">#25 SaaS 약관 미동의</div></div>
+    <div class="flow-connector"></div>
+    <div class="flow-item" id="fi-budget-low" onclick="go('s-budget-low','잔액 부족','flow')"><div class="flow-num">14</div><div class="flow-name">#26 잔액 부족</div></div>
+    <div class="flow-note">번호 클릭 → 해당 화면으로<br>총 15개 화면 연결됨</div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
