@@ -1,0 +1,228 @@
+﻿      <div class="screen active" id="s-ob1">
+        <div class="body">
+          <div class="ob-hero" style="padding:40px 24px 20px">
+            <!-- 손바닥: 배경 없이, 흔들기 애니 -->
+            <div style="height:120px;display:flex;align-items:center;justify-content:center;user-select:none">
+              <img src="assets/wave.gif" alt="" style="width:120px;height:120px;object-fit:contain">
+            </div>
+            <!-- 인디케이터 제거 -->
+            <div style="display:flex;flex-direction:column;gap:10px;align-items:center;width:100%;margin-top:0">
+              <div class="ob-title" style="margin:0">굿리치 설계사<br>페이지를 시작해요</div>
+              <!-- 타이틀-설명 간격: ob-hero gap 대신 개별 margin으로 조정 (기존 ~20px → 12px) -->
+              <div class="ob-desc" style="margin-top:-2px">HR 시스템에서 정보를 가져왔어요.<br>확인하고 수정해 주세요.</div>
+            </div>
+          </div>
+
+          <!-- 폼 -->
+          <div class="ob-form" style="gap:18px;margin-top:12px">
+
+            <div class="field-group" style="gap:6px">
+              <div class="field-label">이름</div>
+              <input class="field field-readonly" value="김설계" readonly style="height:52px">
+            </div>
+
+            <div class="field-group" style="gap:6px">
+              <div class="field-label">소속</div>
+              <input class="field field-readonly" value="굿리치 강남지점" readonly style="height:52px">
+            </div>
+
+            <div class="field-group" style="gap:6px">
+              <div class="field-label">등록번호</div>
+              <input class="field field-readonly" value="2019-가-12345" readonly style="height:52px">
+            </div>
+
+            <!-- 연락처: 수정 가능 강조 -->
+            <div class="field-group" style="gap:6px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div class="field-label" style="margin-bottom:0">연락처</div>
+                <span style="font-size:11px;font-weight:500;color:var(--blue);background:var(--blue-50);padding:2px 8px;border-radius:20px">수정 가능</span>
+              </div>
+              <input class="field" value="010-1234-5678" style="height:52px;background:#fff;border:1.5px solid var(--blue);font-weight:500">
+            </div>
+
+          </div>
+        </div>
+        <div class="ob-footer">
+          <button class="btn-primary" onclick="go('s-ob2','온보딩 2/4','ob1')">다음</button>
+        </div>
+      </div>
+
+      <div class="screen" id="s-ob2">
+        <div class="body">
+          <div class="ob-hero" style="padding:40px 24px 20px">
+            <!-- 아바타: 흰 배경 + 그림자로 회색 배경과 구분 -->
+            <div style="height:120px;display:flex;align-items:center;justify-content:center">
+              <div style="width:100px;height:100px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;color:var(--blue-600);cursor:pointer" onclick="showToast('사진 업로드 기능은 실제 앱에서 연결됩니다')">김</div>
+            </div>
+            <!-- 인디케이터 제거 -->
+            <div style="display:flex;flex-direction:column;gap:10px;align-items:center;width:100%;margin-top:0">
+              <div class="ob-title" style="margin:0">프로필 사진을<br>추가해 볼까요?</div>
+              <div class="ob-desc" style="margin-top:-2px">고객에게 신뢰감을 주는<br>프로필 사진을 설정해 주세요.</div>
+            </div>
+          </div>
+          <div style="padding:0 24px">
+            <div style="border:1.5px dashed var(--gray-100);border-radius:var(--r-md);padding:32px;text-align:center;cursor:pointer;background:#fff" onclick="showToast('사진 업로드 기능은 실제 앱에서 연결됩니다')">
+              <div style="margin-bottom:12px"><svg width="42" height="42" viewBox="0 0 28 28" fill="none"><rect x="2" y="7" width="24" height="18" rx="3" stroke="#B0B8C1" stroke-width="1.8"/><circle cx="14" cy="16" r="5" stroke="#B0B8C1" stroke-width="1.8"/><path d="M10 7l1.5-3h5L18 7" stroke="#B0B8C1" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <div style="font-size:17px;font-weight:600;color:var(--text-1);margin-bottom:4px">사진 업로드</div>
+              <div style="font-size:12px;color:var(--text-3)">JPG, PNG · 최대 5MB</div>
+            </div>
+          </div>
+        </div>
+        <div class="ob-footer">
+          <button class="btn-primary" onclick="go('s-ob3','온보딩 3/4','ob2')">다음</button>
+          <button class="btn-ghost" onclick="go('s-ob3','온보딩 3/4','ob2')">건너뛰기</button>
+        </div>
+      </div>
+
+      <div class="screen" id="s-ob3">
+        <div class="body">
+          <div class="ob-hero" style="padding:40px 24px 20px">
+            <div style="height:120px;display:flex;align-items:center;justify-content:center;user-select:none">
+              <img src="assets/link.png" alt="" style="width:100px;height:100px;object-fit:contain">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;align-items:center;width:100%;margin-top:0">
+              <div class="ob-title" style="margin:0">SNS를 연결하면<br>고객이 찾아와요</div>
+              <div class="ob-desc" style="margin-top:-2px">자주 쓰는 채널을 연결해 주세요.</div>
+            </div>
+          </div>
+
+          <div style="margin:0 24px;display:flex;flex-direction:column;gap:10px">
+
+            <!-- 카카오 -->
+            <div style="background:#fff;border-radius:var(--r-md);display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer" onclick="showToast('카카오 채널 연결은 실제 앱에서 진행됩니다')">
+              <div style="width:44px;height:44px;border-radius:12px;background:#FEE500;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="22" height="20" viewBox="0 0 22 20" fill="none"><path d="M11 0C4.925 0 0 3.813 0 8.52c0 3.01 1.994 5.653 5.012 7.179L3.74 20l5.3-3.52c.643.09 1.303.136 1.96.136 6.075 0 11-3.813 11-8.52C22 3.813 17.075 0 11 0z" fill="#3C1E1E"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:15px;font-weight:600;color:var(--text-1)">카카오 채널</div>
+                <div style="font-size:12px;color:var(--text-3);margin-top:2px">고객 상담 및 알림톡</div>
+              </div>
+              <span style="font-size:13px;font-weight:600;color:var(--blue)">연결</span>
+            </div>
+
+            <!-- 인스타그램 -->
+            <div style="background:#fff;border-radius:var(--r-md);display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer" onclick="showToast('인스타그램 연결은 실제 앱에서 진행됩니다')">
+              <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="white"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:15px;font-weight:600;color:var(--text-1)">인스타그램</div>
+                <div style="font-size:12px;color:var(--text-3);margin-top:2px">릴스·피드 자동 연동</div>
+              </div>
+              <span style="font-size:13px;font-weight:600;color:var(--blue)">연결</span>
+            </div>
+
+            <!-- 유튜브 -->
+            <div style="background:#fff;border-radius:var(--r-md);display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer" onclick="showToast('유튜브 연결은 실제 앱에서 진행됩니다')">
+              <div style="width:44px;height:44px;border-radius:12px;background:#FF0000;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 3l14 9-14 9V3z" fill="white"/></svg>
+              </div>
+              <div style="flex:1">
+                <div style="font-size:15px;font-weight:600;color:var(--text-1)">유튜브</div>
+                <div style="font-size:12px;color:var(--text-3);margin-top:2px">영상 자동 불러오기</div>
+              </div>
+              <span style="font-size:13px;font-weight:600;color:var(--blue)">연결</span>
+            </div>
+
+          </div>
+        </div>
+        <div class="ob-footer">
+          <button class="btn-primary" onclick="go('s-terms','약관 동의','ob3')">다음</button>
+          <button class="btn-ghost" onclick="go('s-terms','약관 동의','ob3')">건너뛰기</button>
+        </div>
+      </div>
+
+      <div class="screen" id="s-ob4">
+        <div class="body">
+          <div class="complete-wrap">
+            <div class="popper-wrap">
+              <img src="assets/cont.png" alt="" style="width:100px;height:100px;object-fit:contain;position:relative;z-index:1;user-select:none">
+              <div class="particle cp1"></div>
+              <div class="particle cp2"></div>
+              <div class="particle cp3"></div>
+              <div class="particle cp4"></div>
+              <div class="particle cp5"></div>
+              <div class="particle cp6"></div>
+              <div class="particle cp7"></div>
+              <div class="particle cp8"></div>
+              <div class="particle cp9"></div>
+              <div class="particle cp10"></div>
+              <div class="particle cp11"></div>
+              <div class="particle cp12"></div>
+              <div class="particle cp13"></div>
+              <div class="particle cp14"></div>
+              <div class="particle cp15"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;align-items:center;width:100%">
+              <div class="ob-title" style="margin:0">김설계님의 페이지가<br>만들어졌어요!</div>
+              <div class="ob-desc" style="margin-top:-2px;margin-bottom:4px">지금 바로 고객과 공유해 보세요.</div>
+            </div>
+            <div class="share-bar" style="width:100%">
+              <span class="share-url">page.goodrich.com/kimseol</span>
+              <button class="share-btn" onclick="showToast('링크가 복사되었습니다')">복사</button>
+            </div>
+          </div>
+        </div>
+        <div class="ob-footer">
+          <button class="btn-primary" onclick="go('s-workspace','워크스페이스','ob4')">대시보드로 이동</button>
+          <button class="btn-secondary" onclick="go('s-customer','고객 페이지','ob4')">내 페이지 미리보기</button>
+          <button class="btn-ghost" onclick="go('s-builder','빌더','ob4')">모듈 설정하기</button>
+        </div>
+      </div>
+
+      <div class="screen" id="s-terms">
+        <div class="nav" style="background:transparent;border-bottom:none">
+          <button class="nav-back" onclick="back()"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M19 8H1M8 1L1 8L8 15" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="body" style="padding:0">
+          <div style="padding:40px 24px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">
+            <div style="font-size:20px;font-weight:700;color:var(--text-1);line-height:1.35">서비스 이용을 위해<br>약관에 동의해 주세요</div>
+            <div style="font-size:13px;color:var(--text-3);line-height:1.4;margin-top:-2px">필수 항목에 동의해야 서비스를 시작할 수 있습니다.</div>
+          </div>
+          <!-- 전체동의 + 개별항목 통합 카드 -->
+          <div style="margin:0 20px;background:#fff;border-radius:var(--r-md);overflow:hidden">
+            <!-- 전체 동의 -->
+            <div style="padding:18px 16px;display:flex;align-items:center;gap:12px;cursor:pointer" onclick="termsToggleAll()">
+              <div id="t-chk-all" style="width:20px;height:20px;border-radius:6px;border:1.5px solid var(--gray-400);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s">
+                <svg width="9" height="7" viewBox="0 0 9 7" id="t-all-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span style="font-size:15px;font-weight:700;color:var(--text-1)">전체 동의</span>
+            </div>
+            <!-- 구분선: 좌우 패딩 적용 -->
+            <div style="margin:0 16px;height:.5px;background:var(--border-md)"></div>
+            <!-- 개별 항목 -->
+            <div style="display:flex;flex-direction:column;padding:8px 0">
+              <div style="display:flex;align-items:center;gap:12px;padding:8px 16px;cursor:pointer" onclick="termsToggle('ti1')">
+                <div class="terms-chk" id="ti1"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div style="flex:1"><span style="font-size:13px;color:var(--text-1)">[필수] 서비스 이용약관</span></div>
+                <span style="font-size:11px;color:var(--blue);cursor:pointer" onclick="event.stopPropagation();showToast('전문 보기')">보기</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:8px 16px;cursor:pointer" onclick="termsToggle('ti2')">
+                <div class="terms-chk" id="ti2"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div style="flex:1"><span style="font-size:13px;color:var(--text-1)">[필수] 개인정보처리방침</span></div>
+                <span style="font-size:11px;color:var(--blue);cursor:pointer" onclick="event.stopPropagation();showToast('전문 보기')">보기</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:8px 16px;cursor:pointer" onclick="termsToggle('ti3')">
+                <div class="terms-chk" id="ti3"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div style="flex:1"><span style="font-size:13px;color:var(--text-1)">[필수] 개인정보 제3자 제공</span></div>
+                <span style="font-size:11px;color:var(--blue);cursor:pointer" onclick="event.stopPropagation();showToast('전문 보기')">보기</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:8px 16px;cursor:pointer" onclick="termsToggle('ti4')">
+                <div class="terms-chk" id="ti4"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div style="flex:1"><span style="font-size:13px;color:var(--text-2)">[선택] 마케팅 정보 수신</span></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:8px 16px;cursor:pointer" onclick="termsToggle('ti5')">
+                <div class="terms-chk" id="ti5"><svg width="9" height="7" viewBox="0 0 9 7" class="chk-icon" style="display:none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div style="flex:1"><span style="font-size:13px;color:var(--text-2)">[선택] 서비스 개선을 위한 데이터 활용</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- 참조 메시지 -->
+          <div style="padding:16px 20px">
+            <div style="font-size:11px;color:var(--text-3);line-height:1.7">본 서비스는 굿리치 소속 설계사를 위한 사내 도구입니다. 수집된 정보는 서비스 제공 목적 이외에 사용되지 않습니다.</div>
+          </div>
+        </div>
+        <div style="padding:12px 20px 24px">
+          <button id="terms-cta" class="btn-primary" style="background:var(--gray-200);color:var(--gray-400);cursor:not-allowed" onclick="termsSubmit()">동의하고 시작하기</button>
+        </div>
+      </div>

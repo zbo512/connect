@@ -1,0 +1,193 @@
+﻿      <div class="screen" id="s-builder">
+        <div class="nav">
+          <button class="nav-back" onclick="back()"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M19 8H1M8 1L1 8L8 15" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="nav-title">페이지 빌더</span>
+          <button class="nav-action" onclick="go('s-customer','고객 페이지','builder')">미리보기</button>
+        </div>
+        <div class="builder-tabs">
+          <div class="btab on" id="bt-mod" onclick="switchBuilderTab('mod')">모듈 설정</div>
+          <div class="btab" id="bt-set" onclick="switchBuilderTab('set')">페이지 설정</div>
+        </div>
+        <div class="body" id="builder-body" style="padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--gray-100)">
+
+          <!-- 페이지 타입 선택 -->
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;padding:0 2px">페이지 타입</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div id="btype-c1" class="btype-card" onclick="selectPageType('c1')">
+                <div style="font-size:13px;font-weight:600;color:var(--text-1)">미니멀형</div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:3px">심플 프로필</div>
+              </div>
+              <div id="btype-c2" class="btype-card on" onclick="selectPageType('c2')">
+                <div style="font-size:13px;font-weight:600;color:var(--text-1)">표준형</div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:3px">사진+카드 융합</div>
+              </div>
+              <div id="btype-c3" class="btype-card" onclick="selectPageType('c3')">
+                <div style="font-size:13px;font-weight:600;color:var(--text-1)">콘텐츠형</div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:3px">콘텐츠 중심</div>
+              </div>
+              <div id="btype-c4" class="btype-card" onclick="selectPageType('c4')">
+                <div style="font-size:13px;font-weight:600;color:var(--text-1)">이벤트형</div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:3px">프로모션 강조</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 드래그 안내 배너 -->
+          <div id="drag-hint-banner" style="background:#EBF3FE;border-radius:var(--r-sm);padding:10px 14px;display:flex;align-items:center;gap:10px">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="#3182F6" flex-shrink:0><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+            <span style="flex:1;font-size:12px;color:#1a56b0;line-height:1.5">모듈을 길게 눌러 순서를 변경할 수 있어요</span>
+            <button onclick="dismissDragHint()" style="background:none;border:none;cursor:pointer;padding:2px;display:flex;align-items:center;color:#3182F6;flex-shrink:0">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+
+          <!-- 아이덴티티 -->
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;padding:0 2px">아이덴티티</div>
+            <div style="background:#fff;border-radius:var(--r-md);overflow:hidden">
+              <!-- 순서 고정 각주 — 우측 정렬 -->
+              <div style="display:flex;justify-content:flex-end;align-items:center;gap:4px;padding:8px 16px 0">
+                <svg width="10" height="12" viewBox="0 0 10 12" fill="none"><rect x="1" y="5" width="8" height="6.5" rx="1.3" fill="#D1D6DB"/><path d="M3 5V3.5a2 2 0 014 0V5" stroke="#D1D6DB" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <span style="font-size:10px;font-weight:500;color:var(--gray-400);letter-spacing:.1px">순서 고정</span>
+              </div>
+              <!-- 프로필 헤더 — 토글 없음 -->
+              <div class="mod-item" style="padding:14px 16px;border-bottom:none;cursor:default">
+                <div class="mod-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="#3182F6"><path fill-rule="evenodd" d="M10 9a4 4 0 100-8 4 4 0 000 8zm-7 9a7 7 0 0114 0H3z" clip-rule="evenodd"/></svg></div>
+                <div class="mod-info"><div class="mod-name">프로필 헤더</div><div class="mod-status">항상 표시</div></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <!-- 카카오 연락 — 토글 없음 -->
+              <div class="mod-item" style="padding:14px 16px;border-bottom:none;cursor:default">
+                <div class="mod-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="#3182F6"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7z" clip-rule="evenodd"/></svg></div>
+                <div class="mod-info"><div class="mod-name">카카오 연락</div><div class="mod-status">항상 표시</div></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <!-- SNS 링크 — 토글 있음 -->
+              <div class="mod-item" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-sns"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><circle cx="4.5" cy="10" r="2.5"/><circle cx="15.5" cy="4.5" r="2.5"/><circle cx="15.5" cy="15.5" r="2.5"/><path d="M7 9l6-3.5M7 11l6 3.5" stroke="#8B95A1" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                <div class="mod-info"><div class="mod-name">SNS 링크</div><div id="st-sns" class="mod-status" data-on="SNS 링크 연결됨" data-off="인스타·유튜브·블로그 링크">SNS 링크 연결됨</div></div>
+                <div class="toggle on" id="bld-sns" onclick="bldToggle('bld-sns')"></div>
+              </div>
+            </div>
+          </div>
+          <!-- 영업 도구 -->
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;padding:0 2px">영업 도구</div>
+            <div class="builder-sort-card" style="background:#fff;border-radius:var(--r-md);overflow:hidden">
+              <div class="mod-item" draggable="true" data-mod="ins" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-ins"><svg width="20" height="20" viewBox="0 0 20 20" fill="#3182F6"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg></div>
+                <div class="mod-info"><div class="mod-name">보험 조회</div><div id="st-ins" class="mod-status" data-on="교보라이프플래닛 연동" data-off="마이데이터 기반 보험 현황">교보라이프플래닛 연동</div></div>
+                <div class="toggle on" id="bld-ins" onclick="bldToggle('bld-ins')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="con" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-con"><svg width="20" height="20" viewBox="0 0 20 20" fill="#3182F6"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg></div>
+                <div class="mod-info"><div class="mod-name">상담 예약</div><div id="st-con" class="mod-status" data-on="슬롯 3개 설정됨" data-off="슬롯 기반 일정 예약">슬롯 3개 설정됨</div></div>
+                <div class="toggle on" id="bld-con" onclick="bldToggle('bld-con')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="gui" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-gui"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg></div>
+                <div class="mod-info">
+                  <div class="mod-name">보험 가이드 <span style="font-size:10px;background:var(--blue-50);color:var(--blue);padding:1px 7px;border-radius:20px;font-weight:600">추천</span></div>
+                  <div id="st-gui" class="mod-status" data-on="회사 자료 12건" data-off="회사 제공 카드뉴스·자료">회사 제공 카드뉴스·자료</div>
+                </div>
+                <div class="toggle" id="bld-gui" onclick="bldToggle('bld-gui')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="ana" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-ana"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><rect x="2" y="2" width="16" height="16" rx="3"/><path d="M5 14l3.5-4 2.5 2.5L15 7" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div class="mod-info">
+                  <div class="mod-name">보장 분석 <span style="font-size:10px;background:var(--gray-100);color:var(--text-3);padding:1px 6px;border-radius:20px;font-weight:500">교보라이프플래닛</span></div>
+                  <div id="st-ana" class="mod-status" data-on="교보라이프플래닛 연동" data-off="보장 갭 분석·추천">보장 갭 분석·추천</div>
+                </div>
+                <div class="toggle" id="bld-ana" onclick="bldToggle('bld-ana')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="calc" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-calc"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><rect x="3" y="2.5" width="14" height="15" rx="2.5"/><rect x="5.5" y="5" width="9" height="3" rx="1" fill="white"/><rect x="5.5" y="10" width="2.5" height="2.5" rx=".6" fill="white"/><rect x="8.75" y="10" width="2.5" height="2.5" rx=".6" fill="white"/><rect x="12" y="10" width="2.5" height="2.5" rx=".6" fill="white"/><rect x="5.5" y="13.5" width="2.5" height="2.5" rx=".6" fill="white"/><rect x="8.75" y="13.5" width="2.5" height="2.5" rx=".6" fill="white"/><rect x="12" y="13.5" width="2.5" height="2.5" rx=".6" fill="white"/></svg></div>
+                <div class="mod-info"><div class="mod-name">보험료 계산기</div><div id="st-calc" class="mod-status" data-on="시뮬레이션 활성" data-off="간편 보험료 시뮬레이션">간편 보험료 시뮬레이션</div></div>
+                <div class="toggle" id="bld-calc" onclick="bldToggle('bld-calc')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="claim" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-claim"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><path d="M5 2.5h7.5L17 7v10.5a1 1 0 01-1 1H5a1 1 0 01-1-1v-15a1 1 0 011-1z"/><path d="M12.5 2.5V7H17" fill="#6B7684"/><path d="M7 10.5h6M7 13h4" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+                <div class="mod-info"><div class="mod-name">청구 대행</div><div id="st-claim" class="mod-status" data-on="서류 접수 활성" data-off="고객 보험금 청구 서류 접수">고객 보험금 청구 서류 접수</div></div>
+                <div class="toggle" id="bld-claim" onclick="bldToggle('bld-claim')"></div>
+              </div>
+            </div>
+          </div>
+          <!-- 콘텐츠 -->
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;padding:0 2px">콘텐츠</div>
+            <div class="builder-sort-card" style="background:#fff;border-radius:var(--r-md);overflow:hidden">
+              <div class="mod-item" draggable="true" data-mod="news" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-news"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"/><path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"/></svg></div>
+                <div class="mod-info"><div class="mod-name">데일리 뉴스</div><div id="st-news" class="mod-status" data-on="자동 업데이트 중" data-off="보험·금융 뉴스 자동 큐레이션">보험·금융 뉴스 자동 큐레이션</div></div>
+                <div class="toggle" id="bld-news" onclick="bldToggle('bld-news')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="mag" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-mag"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><path d="M14.5 2.5L17.5 5.5l-9 9-3.5.5.5-3.5 9-9z"/><path d="M12 5l3 3" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+                <div class="mod-info"><div class="mod-name">매거진</div><div id="st-mag" class="mod-status" data-on="아티클 발행 중" data-off="설계사 직접 작성 아티클">설계사 직접 작성 아티클</div></div>
+                <div class="toggle" id="bld-mag" onclick="bldToggle('bld-mag')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="yt" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-yt"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><rect x="2" y="4" width="16" height="12" rx="3"/><path d="M8.5 7.5l5 2.5-5 2.5V7.5z" fill="white"/></svg></div>
+                <div class="mod-info"><div class="mod-name">유튜브 영상</div><div id="st-yt" class="mod-status" data-on="최신 영상 연동됨" data-off="내 유튜브 채널 최신 영상">내 유튜브 채널 최신 영상</div></div>
+                <div class="toggle" id="bld-yt" onclick="bldToggle('bld-yt')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="insta" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-insta"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><rect x="2" y="2" width="16" height="16" rx="4.5"/><circle cx="10" cy="10" r="3.5" stroke="white" stroke-width="1.6"/><circle cx="14.5" cy="5.5" r="1" fill="white"/></svg></div>
+                <div class="mod-info"><div class="mod-name">인스타그램 피드</div><div id="st-insta" class="mod-status" data-on="피드 자동 연동됨" data-off="인스타 최근 게시물 자동 연동">인스타 최근 게시물 자동 연동</div></div>
+                <div class="toggle" id="bld-insta" onclick="bldToggle('bld-insta')"></div>
+              </div>
+            </div>
+          </div>
+          <!-- 관계 -->
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;padding:0 2px">관계</div>
+            <div class="builder-sort-card" style="background:#fff;border-radius:var(--r-md);overflow:hidden">
+              <div class="mod-item" draggable="true" data-mod="evt" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-evt"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 010 4h-5V9h-2v1H4a2 2 0 010-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"/><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"/></svg></div>
+                <div class="mod-info"><div class="mod-name">이벤트 보상</div><div id="st-evt" class="mod-status" data-on="잔액 50,000원" data-off="기프티콘·포인트 보상 이벤트">기프티콘·포인트 보상 이벤트</div></div>
+                <div class="toggle" id="bld-evt" onclick="bldToggle('bld-evt')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="ref" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-ref"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg></div>
+                <div class="mod-info"><div class="mod-name">친구 추천</div><div id="st-ref" class="mod-status" data-on="추천 링크 공유 중" data-off="추천 코드 공유 보상">추천 코드 공유 보상</div></div>
+                <div class="toggle" id="bld-ref" onclick="bldToggle('bld-ref')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="sub" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-sub"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><path d="M10 2.5a6.5 6.5 0 016.5 6.5v3.5l1.5 2H2l1.5-2V9A6.5 6.5 0 0110 2.5z"/><path d="M8 14.5a2 2 0 004 0" fill="#8B95A1"/></svg></div>
+                <div class="mod-info"><div class="mod-name">소식 구독</div><div id="st-sub" class="mod-status" data-on="채널 팔로우 유도 중" data-off="카카오 채널 팔로우 유도">카카오 채널 팔로우 유도</div></div>
+                <div class="toggle" id="bld-sub" onclick="bldToggle('bld-sub')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="rev" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-rev"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><path d="M10 2.5l2.1 4.3 4.7.7-3.4 3.3.8 4.7L10 13l-4.2 2.5.8-4.7L3.2 7.5l4.7-.7L10 2.5z"/></svg></div>
+                <div class="mod-info"><div class="mod-name">후기</div><div id="st-rev" class="mod-status" data-on="후기 수집 중" data-off="고객 후기 모아보기">고객 후기 모아보기</div></div>
+                <div class="toggle" id="bld-rev" onclick="bldToggle('bld-rev')"></div>
+              </div>
+              <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+              <div class="mod-item" draggable="true" data-mod="faq" style="padding:14px 16px;border-bottom:none">
+                <div class="mod-icon" id="icon-faq"><svg width="20" height="20" viewBox="0 0 20 20" fill="#8B95A1"><circle cx="10" cy="10" r="8"/><path d="M8 8c0-1.1.9-2 2-2s2 .9 2 2c0 1-1 1.5-1.5 2S10 11 10 12" stroke="white" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="14.5" r=".8" fill="white"/></svg></div>
+                <div class="mod-info"><div class="mod-name">FAQ</div><div id="st-faq" class="mod-status" data-on="FAQ 게시 중" data-off="자주 묻는 보험 질문">자주 묻는 보험 질문</div></div>
+                <div class="toggle" id="bld-faq" onclick="bldToggle('bld-faq')"></div>
+              </div>
+            </div>
+          </div>
+          <div style="height:8px"></div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab" onclick="go('s-workspace','대시보드','builder')"><div class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2.5L3 9.5V21h6v-6h6v6h6V9.5L12 2.5z" fill="currentColor"/></svg></div><div class="tab-label">홈</div></div>
+          <div class="tab on" onclick="go('s-builder','빌더','builder')"><div class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/></svg></div><div class="tab-label">빌더</div></div>
+          <div class="tab" onclick="go('s-customer','고객 페이지','builder')"><div class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8H4z" fill="currentColor"/></svg></div><div class="tab-label">미리보기</div></div>
+          <div class="tab" onclick="go('s-notify','알림','builder')"><div class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 017 7v4l1.5 2.5H3.5L5 13V9a7 7 0 017-7z" fill="currentColor"/><path d="M10 19a2 2 0 004 0H10z" fill="currentColor"/></svg></div><div class="tab-label">알림</div></div>
+        </div>
+      </div>

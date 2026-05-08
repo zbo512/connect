@@ -1,0 +1,309 @@
+﻿      <div class="screen" id="s-claim">
+
+        <!-- ── 공유 버튼 (랜딩 전용, step1/2에서 숨김) ── -->
+        <div id="cl-share-btn" style="position:absolute;top:12px;right:16px;z-index:10;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="showToast('링크가 복사되었습니다')">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><circle cx="15" cy="4" r="2" stroke="#444" stroke-width="1.5"/><circle cx="5" cy="10" r="2" stroke="#444" stroke-width="1.5"/><circle cx="15" cy="16" r="2" stroke="#444" stroke-width="1.5"/><path d="M7 8.8l6-3.6M7 11.2l6 3.6" stroke="#444" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+
+        <!-- ── 랜딩 ── -->
+        <div id="claim-landing" style="display:flex;flex-direction:column;height:100%;position:relative;background:#F2F4F6">
+
+          <!-- 스크롤 영역 -->
+          <div class="body" style="flex:1;overflow-y:auto;padding:32px 16px 80px">
+
+            <!-- ① 제목 -->
+            <div style="font-size:24px;font-weight:800;color:var(--text-1);line-height:1.35;margin-top:20px;margin-bottom:28px;text-align:center">김설계의<br>보험금 청구 서비스</div>
+
+            <!-- ② 히어로 이미지 -->
+            <div style="text-align:center;margin-bottom:28px">
+              <img src="assets/claim-hero.png" alt="" style="width:72%;max-width:260px;height:auto;display:inline-block">
+            </div>
+
+            <!-- ③④ 메뉴 카드 (사진찍어 청구 + 청구이력 확인) -->
+            <div style="background:#fff;border-radius:16px;margin-bottom:12px;overflow:hidden">
+              <!-- 사진찍어 청구 -->
+              <div style="display:flex;align-items:center;padding:18px 16px;gap:14px">
+                <div style="width:44px;height:44px;border-radius:12px;background:#EDEEFF;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="14" rx="3" stroke="#5B72F0" stroke-width="1.8"/><circle cx="12" cy="13" r="3.5" stroke="#5B72F0" stroke-width="1.8"/><path d="M9 6l1.2-2h3.6L15 6" stroke="#5B72F0" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="flex:1">
+                  <div style="font-size:12px;color:var(--text-3);margin-bottom:2px">사진찍어 청구</div>
+                  <div style="font-size:16px;font-weight:700;color:var(--text-1)">보험금 청구하기</div>
+                </div>
+                <button onclick="clStartClaim()" style="flex-shrink:0;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;padding:10px 18px;cursor:pointer;font-family:'Pretendard',sans-serif;white-space:nowrap">청구 시작</button>
+              </div>
+              <!-- 구분선 -->
+              <div style="height:.5px;background:var(--border);margin:0 16px"></div>
+              <!-- 청구이력 확인 -->
+              <div style="display:flex;align-items:center;padding:18px 16px;gap:14px">
+                <div style="width:44px;height:44px;border-radius:12px;background:#FFF8E1;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="3" stroke="#F5A623" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div style="flex:1">
+                  <div style="font-size:16px;font-weight:700;color:var(--text-1)">청구이력 확인</div>
+                </div>
+                <button onclick="showToast('청구 이력 조회 기능은 준비 중입니다')" style="flex-shrink:0;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;padding:10px 18px;cursor:pointer;font-family:'Pretendard',sans-serif;white-space:nowrap">조회하기</button>
+              </div>
+            </div>
+
+            <!-- ⑤ 청구에 필요한 서류 카드 -->
+            <div style="background:#fff;border-radius:16px;overflow:hidden" onclick="clOpenDocs()">
+              <div style="display:flex;align-items:center;padding:13px 16px;gap:12px;cursor:pointer">
+                <div style="width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 2h9l5 5v15a1 1 0 01-1 1H5a1 1 0 01-1-1V3a1 1 0 011-1z" fill="#3DBE6B" opacity=".15"/><path d="M6 2h9l5 5v15a1 1 0 01-1 1H5a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="#3DBE6B" stroke-width="1.6"/><path d="M15 2v5h5" stroke="#3DBE6B" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 11h8M8 14h6M8 17h4" stroke="#3DBE6B" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </div>
+                <div style="flex:1;font-size:14px;font-weight:500;color:var(--text-2)">청구에 필요한 서류</div>
+                <svg width="6" height="11" viewBox="0 0 6 11" fill="none"><path d="M1 1l4.5 4.5L1 10" stroke="#C4CAD4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 플로팅 네비 — position:absolute로 하단 고정 -->
+          <div id="cl-fnav" style="position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,0.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:.5px solid rgba(44,44,42,0.10);display:flex;align-items:center;justify-content:space-around;height:58px;z-index:20;padding:0 4px">
+            <div class="fnav-item" onclick="go('s-customer','홈','customer')">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2.5L3 9.5V21h6v-6h6v6h6V9.5L12 2.5z" fill="currentColor"/></svg>
+              <span>홈</span>
+            </div>
+            <div class="fnav-item" onclick="go('s-customer','보험조회','customer')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5 3.6 9.5 8 10.5C16.4 21.5 20 17 20 12V6L12 2z" fill="currentColor"/></svg>
+              <span>보험조회</span>
+            </div>
+            <div class="fnav-item" onclick="showToast('보장분석 화면으로 이동')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="12" width="4" height="9" rx="1" fill="currentColor"/><rect x="10" y="7" width="4" height="14" rx="1" fill="currentColor"/><rect x="17" y="3" width="4" height="18" rx="1" fill="currentColor"/></svg>
+              <span>보장분석</span>
+            </div>
+            <div class="fnav-item active-fnav">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 2h9l5 5v15a1 1 0 01-1 1H5a1 1 0 01-1-1V3a1 1 0 011-1z" fill="currentColor"/><path d="M15 2v5h5" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 11h8M8 14h5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>청구</span>
+            </div>
+            <div class="fnav-item" onclick="showToast('예약 화면으로 이동')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" fill="currentColor"/><rect x="3" y="5" width="18" height="7" rx="2" fill="currentColor" opacity=".35"/><path d="M8 3v4M16 3v4M3 11h18" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>예약</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Step 1: 피보험자 기본정보 입력 ── -->
+        <div id="claim-step1" style="display:none;flex-direction:column;height:100%">
+          <!-- 네비 -->
+          <div style="height:52px;background:#fff;display:flex;align-items:center;padding:0 16px;flex-shrink:0">
+            <button style="width:36px;height:36px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-1)" onclick="clGoLanding()"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M19 8H1M8 1L1 8L8 15" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <!-- 프로그레스 바 -->
+          <div style="height:3px;background:var(--gray-100);flex-shrink:0"><div style="width:50%;height:100%;background:var(--blue);transition:width .3s"></div></div>
+
+          <div class="body" style="padding:24px 20px 20px;display:flex;flex-direction:column;gap:20px">
+            <div>
+              <div style="font-size:21px;font-weight:700;color:var(--text-1);line-height:1.4;margin-bottom:10px">피보험자 <span style="color:var(--blue)">기본정보</span>를<br>입력해 주세요.</div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#3182F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size:13px;color:var(--text-2)">소중한 개인정보는 무단으로 사용되지 않습니다</span>
+              </div>
+            </div>
+
+            <!-- 이름 -->
+            <div class="field-group">
+              <div class="field-label">이름</div>
+              <input class="field" id="cl-name" placeholder="홍길동" style="background:#fff;border:1.5px solid var(--border-md)" oninput="clCheckStep1()">
+            </div>
+
+            <!-- 휴대폰번호 -->
+            <div class="field-group">
+              <div class="field-label">휴대폰번호</div>
+              <input class="field" id="cl-phone" placeholder="010-0000-0000" inputmode="tel" style="background:#fff;border:1.5px solid var(--border-md)" oninput="formatPhone(this);clCheckStep1()">
+            </div>
+
+            <!-- 주민등록번호 -->
+            <div class="field-group">
+              <div class="field-label">주민등록번호</div>
+              <div style="display:flex;align-items:center;background:#fff;border:1.5px solid var(--border-md);border-radius:var(--r-sm);height:56px;padding:0 16px">
+                <input id="cl-rn1" placeholder="800101" maxlength="6" style="width:88px;flex-shrink:0;border:none;outline:none;font-size:16px;font-family:'Pretendard',sans-serif;color:var(--text-1);background:transparent" oninput="this.value=this.value.replace(/\D/g,'');clCheckStep1()">
+                <span style="color:var(--text-3);font-size:16px;margin:0 8px">-</span>
+                <input id="cl-rn2" placeholder="●●●●●●●" maxlength="7" type="text" inputmode="numeric" style="flex:1;border:none;outline:none;font-size:16px;font-family:'Pretendard',sans-serif;color:var(--text-1);background:transparent;-webkit-text-security:disc" oninput="this.value=this.value.replace(/\D/g,'');clCheckStep1()">
+              </div>
+              <div style="font-size:11px;color:var(--text-3)">주민번호는 암호화되어 전송되며 보험사 청구 외 사용하지 않습니다.</div>
+            </div>
+          </div>
+
+          <!-- 다음 버튼 고정 하단 -->
+          <div style="padding:12px 20px 20px;background:#fff;border-top:.5px solid var(--border);flex-shrink:0">
+            <button id="cl-next-btn" class="btn-primary" style="opacity:.4;cursor:not-allowed" onclick="clStep1Next()">다음</button>
+          </div>
+        </div>
+
+        <!-- ── Step 2: 서류 업로드 ── -->
+        <div id="claim-step2" style="display:none;flex-direction:column;height:100%">
+          <!-- 네비 -->
+          <div style="height:52px;background:#fff;display:flex;align-items:center;padding:0 16px;flex-shrink:0">
+            <button style="width:36px;height:36px;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-1)" onclick="clGoStep1()"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M19 8H1M8 1L1 8L8 15" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <!-- 프로그레스 바 100% -->
+          <div style="height:3px;background:var(--gray-100);flex-shrink:0"><div style="width:100%;height:100%;background:var(--blue)"></div></div>
+
+          <div class="body" style="padding:24px 20px 20px;display:flex;flex-direction:column;gap:16px">
+            <div>
+              <div style="font-size:21px;font-weight:700;color:var(--text-1);margin-bottom:6px">청구 서류를<br>업로드해 주세요</div>
+              <div style="font-size:13px;color:var(--text-2)">사진으로 찍어 올려 주세요.</div>
+            </div>
+
+            <!-- 필수 서류 -->
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="font-size:12px;font-weight:600;color:var(--text-2)">필수 서류</div>
+              <div class="upload-item" id="ul-diagnosis" onclick="clUpload('ul-diagnosis','진단서')">
+                <div style="width:40px;height:40px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#6B7684" stroke-width="1.5" stroke-linecap="round"><path d="M10 6v8M6 10h8"/><rect x="3" y="3" width="14" height="14" rx="3"/></svg></div>
+                <div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--text-1)">진단서</div><div style="font-size:11px;color:var(--text-3);margin-top:1px">병원 발급 원본 또는 사본</div></div>
+                <div class="ul-status" id="ul-diagnosis-st"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#3182F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              </div>
+              <div class="upload-item" id="ul-receipt" onclick="clUpload('ul-receipt','영수증')">
+                <div style="width:40px;height:40px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#6B7684" stroke-width="1.5" stroke-linecap="round"><path d="M6 7h8M6 10h6M6 13h4"/><rect x="3" y="2" width="14" height="16" rx="2"/></svg></div>
+                <div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--text-1)">진료비 영수증</div><div style="font-size:11px;color:var(--text-3);margin-top:1px">병원·약국 영수증 전체</div></div>
+                <div class="ul-status" id="ul-receipt-st"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#3182F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              </div>
+              <div class="upload-item" id="ul-detail" onclick="clUpload('ul-detail','세부내역서')">
+                <div style="width:40px;height:40px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#6B7684" stroke-width="1.5" stroke-linecap="round"><path d="M6 7h8M6 10h8M6 13h5"/><rect x="3" y="2" width="14" height="16" rx="2"/></svg></div>
+                <div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--text-1)">진료비 세부내역서</div><div style="font-size:11px;color:var(--text-3);margin-top:1px">입원·외래 세부 항목 포함</div></div>
+                <div class="ul-status" id="ul-detail-st"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#3182F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              </div>
+            </div>
+
+            <!-- 추가 서류 -->
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="font-size:12px;font-weight:600;color:var(--text-2)">추가 서류 (해당 시)</div>
+              <div class="upload-item" id="ul-discharge" onclick="clUpload('ul-discharge','퇴원확인서')" style="opacity:.6">
+                <div style="width:40px;height:40px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#6B7684" stroke-width="1.5" stroke-linecap="round"><path d="M2 13V7a2 2 0 012-2h12a2 2 0 012 2v6"/><path d="M2 13h16M2 16h16"/><rect x="5" y="8" width="4" height="3" rx="1"/></svg></div>
+                <div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--text-1)">입퇴원확인서</div><div style="font-size:11px;color:var(--text-3);margin-top:1px">입원 청구 시 필요</div></div>
+                <div class="ul-status" id="ul-discharge-st"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              </div>
+            </div>
+
+            <!-- 촬영 업로드 영역 -->
+            <div style="border:1.5px dashed var(--border-md);border-radius:var(--r-md);padding:24px;text-align:center;cursor:pointer;background:#fff" onclick="showToast('카메라 또는 갤러리에서 선택 — 실제 앱에서 연결됩니다')">
+              <div style="margin-bottom:10px"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="7" width="24" height="18" rx="3" stroke="#B0B8C1" stroke-width="1.8"/><circle cx="14" cy="16" r="5" stroke="#B0B8C1" stroke-width="1.8"/><path d="M10 7l1.5-3h5L18 7" stroke="#B0B8C1" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <div style="font-size:14px;font-weight:500;color:var(--text-1);margin-bottom:4px">서류 사진 촬영 또는 파일 선택</div>
+              <div style="font-size:12px;color:var(--text-3)">JPG · PNG · PDF · 최대 10MB / 파일</div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <button class="btn-primary" onclick="clSubmit()">청구 접수하기</button>
+              <button class="btn-ghost" onclick="clGoStep1()">← 정보 수정하기</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 청구 서류 안내 바텀시트 ── -->
+        <div id="cl-docs-overlay" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:flex-end" onclick="clCloseDocs(event)">
+          <div style="background:#fff;border-radius:20px 20px 0 0;width:100%;max-height:85%;display:flex;flex-direction:column" onclick="event.stopPropagation()">
+            <!-- 핸들 + 제목 -->
+            <div style="padding:12px 20px 0;flex-shrink:0">
+              <div style="width:36px;height:4px;background:var(--gray-200);border-radius:2px;margin:0 auto 16px"></div>
+              <div style="display:flex;align-items:center;margin-bottom:16px">
+                <div style="font-size:16px;font-weight:700;color:var(--text-1);flex:1">청구에 필요한 서류</div>
+                <button onclick="clCloseDocs()" style="width:28px;height:28px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;color:var(--text-2)">✕</button>
+              </div>
+            </div>
+            <!-- 스크롤 영역 -->
+            <div style="overflow-y:auto;padding:0 20px 32px">
+
+              <!-- 공통서류 -->
+              <div style="margin-bottom:20px">
+                <div style="font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:10px">공통서류</div>
+                <div style="display:flex;gap:14px;margin-bottom:8px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">병원</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">진료비 영수증<br>통원확인서·진단서·처방전 중 1종</div>
+                </div>
+                <div style="display:flex;gap:14px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">약국</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">약제비 영수증</div>
+                </div>
+              </div>
+              <div style="height:.5px;background:var(--border);margin-bottom:20px"></div>
+
+              <!-- 입원시 -->
+              <div style="margin-bottom:20px">
+                <div style="font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:10px">입원시</div>
+                <div style="display:flex;gap:14px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">병원</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">진단서·입퇴원확인서 중 1종<br>진료비 세부내역서</div>
+                </div>
+              </div>
+              <div style="height:.5px;background:var(--border);margin-bottom:20px"></div>
+
+              <!-- 수술 -->
+              <div style="margin-bottom:20px">
+                <div style="font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:10px">수술</div>
+                <div style="display:flex;gap:14px;margin-bottom:8px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">병원</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">진단서·입퇴원확인서 중 1종</div>
+                </div>
+                <div style="display:flex;gap:14px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">응급</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">응급실 외래진료 기록지</div>
+                </div>
+              </div>
+              <div style="height:.5px;background:var(--border);margin-bottom:20px"></div>
+
+              <!-- 14세 미만 -->
+              <div style="margin-bottom:20px">
+                <div style="font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:10px">14세 미만 자녀 대리청구</div>
+                <div style="display:flex;gap:14px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">법원</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">가족관계증명서</div>
+                </div>
+              </div>
+
+              <!-- 구분선 (두꺼운 섹션 구분) -->
+              <div style="height:8px;background:var(--gray-50);margin:0 -20px 20px"></div>
+
+              <!-- 계좌 정보 필요한 보험사 -->
+              <div style="margin-bottom:20px">
+                <div style="font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:10px">청구 시 <span style="color:var(--blue)">계좌 정보</span> 필요한 보험사</div>
+                <div style="display:flex;gap:14px;margin-bottom:8px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">손해</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">NH농협손해보험, 흥국화재, 현대해상,<br>DB손해보험, 한화손해보험,<br>롯데손해보험, MG손해보험</div>
+                </div>
+                <div style="display:flex;gap:14px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">생명</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">신한라이프, DGB생명, KB생명보험,<br>교직원공제회보험</div>
+                </div>
+              </div>
+              <div style="height:8px;background:var(--gray-50);margin:0 -20px 20px"></div>
+
+              <!-- 팩스 정보 필요한 보험사 -->
+              <div>
+                <div style="font-size:15px;font-weight:700;color:var(--text-1);margin-bottom:10px">청구 시 <span style="color:var(--blue)">팩스 정보</span> 필요한 보험사</div>
+                <div style="display:flex;gap:14px;margin-bottom:8px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">손해</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">AXA손해보험</div>
+                </div>
+                <div style="display:flex;gap:14px">
+                  <div style="font-size:13px;font-weight:600;color:var(--blue);min-width:28px;padding-top:1px">생명</div>
+                  <div style="font-size:13px;color:var(--text-2);line-height:1.7">미래에셋생명, 신한라이프, 흥국생명,<br>삼성생명, 교보생명, 한화생명,<br>KDB생명, 하나생명</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 청구인 서명 바텀시트 오버레이 ── -->
+        <div id="cl-sign-overlay" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:50;align-items:flex-end" onclick="clCloseSign(event)">
+          <div style="background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 28px;width:100%" onclick="event.stopPropagation()">
+            <!-- 핸들 + 닫기 -->
+            <div style="display:flex;align-items:center;margin-bottom:20px">
+              <div style="font-size:16px;font-weight:700;color:var(--text-1);flex:1">청구인 서명</div>
+              <button onclick="clCloseSign()" style="width:28px;height:28px;border-radius:50%;background:var(--gray-50);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--text-2)">✕</button>
+            </div>
+            <!-- 서명 캔버스 영역 -->
+            <div style="width:100%;height:180px;border-radius:var(--r-md);background:#F5F5F7;position:relative;overflow:hidden;margin-bottom:12px;display:flex;align-items:center;justify-content:center">
+              <!-- 점선 패턴 배경 -->
+              <svg style="position:absolute;inset:0;width:100%;height:100%"><defs><pattern id="dot-p" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#D3D1C7"/></pattern></defs><rect width="100%" height="100%" fill="url(#dot-p)"/></svg>
+              <canvas id="cl-sign-canvas" style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair" width="335" height="180"></canvas>
+              <span id="cl-sign-placeholder" style="font-size:13px;color:var(--text-3);pointer-events:none;position:relative">여기에 서명해 주세요</span>
+            </div>
+            <div style="font-size:12px;color:var(--text-2);margin-bottom:20px">병원비 청구 시 본인 인증 용도로 사용합니다.</div>
+            <button class="btn-primary" style="background:var(--blue-600)" onclick="clConfirmSign()">동의 및 확인</button>
+          </div>
+        </div>
+
+      </div>

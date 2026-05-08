@@ -1,0 +1,83 @@
+﻿      <div class="screen" id="s-magazine">
+        <div class="nav">
+          <button class="nav-back" onclick="back()"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M19 8H1M8 1L1 8L8 15" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="nav-title">매거진</span>
+        </div>
+        <div class="builder-tabs">
+          <div class="btab on" id="mgt-mag" onclick="switchMagTab('mag')">매거진</div>
+          <div class="btab" id="mgt-card" onclick="switchMagTab('card')">보험 가이드</div>
+        </div>
+        <!-- 매거진 탭 -->
+        <div class="body" id="mag-tab" style="padding:16px;display:flex;flex-direction:column;gap:14px">
+          <!-- 피처 -->
+          <div style="border-radius:var(--r-md);overflow:hidden;border:.5px solid var(--border);cursor:pointer" onclick="showToast('아티클 전체 보기 — 실제 앱에서 연결됩니다')">
+            <div style="height:160px;background:linear-gradient(135deg,#EBF3FE,#3182F630);display:flex;align-items:center;justify-content:center;font-size:44px" style="display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 3 21l.5-4.5L17 3z" fill="#3182F6"/><path d="M15 5l4 4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div style="padding:16px;background:#fff">
+              <div style="font-size:11px;color:var(--text-3);margin-bottom:6px">2026.05.01 · 읽는 시간 5분</div>
+              <div style="font-size:16px;font-weight:700;color:var(--text-1);line-height:1.4;margin-bottom:8px">50대가 꼭 알아야 할 암보험 3가지 포인트</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.6">진단비, 수술비, 입원비의 차이를 모르면 보험료만 낭비하게 됩니다. 13년 경력 설계사가 직접 정리했습니다.</div>
+            </div>
+          </div>
+          <!-- 목록 -->
+          <div style="display:flex;flex-direction:column;gap:10px">
+
+            <div style="display:flex;align-items:center;gap:14px;background:#fff;border:.5px solid var(--border);border-radius:var(--r-md);padding:14px;cursor:pointer" onclick="showToast('아티클 전체 보기')">
+              <div style="width:80px;height:80px;border-radius:12px;background:var(--teal-50);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="36" height="36" viewBox="0 0 20 20" fill="none"><path d="M10 2L3.5 5v5.5C3.5 14.5 6.5 17.8 10 18.5c3.5-.7 6.5-4 6.5-8V5L10 2z" fill="#0E9E6E"/><path d="M7 10l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:12px;color:var(--text-3);margin-bottom:5px">2026.04.28 · 3분</div>
+                <div style="font-size:16px;font-weight:700;color:var(--text-1);line-height:1.35;letter-spacing:-.2px">실손보험 청구,<br>이렇게 하면 빠릅니다</div>
+              </div>
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none" style="flex-shrink:0"><path d="M1 1l6 6-6 6" stroke="var(--text-3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:14px;background:#fff;border:.5px solid var(--border);border-radius:var(--r-md);padding:14px;cursor:pointer" onclick="showToast('아티클 전체 보기')">
+              <div style="width:80px;height:80px;border-radius:12px;background:var(--amber-50);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="36" height="36" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" fill="#F7B731"/><path d="M10 6v8M8 7.5c0-.8.9-1.5 2-1.5s2 .7 2 1.5c0 .8-.9 1.5-2 1.5S8 10.3 8 11.1c0 .8.9 1.4 2 1.4s2-.6 2-1.4" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:12px;color:var(--text-3);margin-bottom:5px">2026.04.20 · 4분</div>
+                <div style="font-size:16px;font-weight:700;color:var(--text-1);line-height:1.35;letter-spacing:-.2px">월 보험료 10만원<br>줄인 실제 사례</div>
+              </div>
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none" style="flex-shrink:0"><path d="M1 1l6 6-6 6" stroke="var(--text-3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:14px;background:#fff;border:.5px solid var(--border);border-radius:var(--r-md);padding:14px;cursor:pointer" onclick="showToast('아티클 전체 보기')">
+              <div style="width:80px;height:80px;border-radius:12px;background:#fce4ec;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0">❤️</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:12px;color:var(--text-3);margin-bottom:5px">2026.04.14 · 6분</div>
+                <div style="font-size:16px;font-weight:700;color:var(--text-1);line-height:1.35;letter-spacing:-.2px">건강보험 vs 민간보험<br>어떻게 다를까</div>
+              </div>
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none" style="flex-shrink:0"><path d="M1 1l6 6-6 6" stroke="var(--text-3)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+          </div>
+        </div>
+        <!-- 보험 가이드(카드뉴스) 탭 -->
+        <div class="body" id="card-tab" style="padding:16px;display:none;flex-direction:column;gap:12px">
+          <div style="font-size:12px;color:var(--text-3)">회사 제공 자료 12건</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div style="border-radius:var(--r-md);overflow:hidden;border:.5px solid var(--border);cursor:pointer" onclick="showToast('카드뉴스 보기')">
+              <div style="height:110px;background:var(--blue-50);display:flex;align-items:center;justify-content:center"><svg width="32" height="32" viewBox="0 0 20 20" fill="none"><path d="M5 2.5h7.5L17 7v10.5a1 1 0 01-1 1H5a1 1 0 01-1-1v-15a1 1 0 011-1z" fill="#3182F6"/><path d="M12.5 2.5V7H17" fill="#1B64DA"/><path d="M7 10.5h6M7 13h4" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+              <div style="padding:10px;background:#fff"><div style="font-size:12px;font-weight:500;color:var(--text-1);line-height:1.4">실손보험 A to Z</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">8장 · 2026.04</div></div>
+            </div>
+            <div style="border-radius:var(--r-md);overflow:hidden;border:.5px solid var(--border);cursor:pointer" onclick="showToast('카드뉴스 보기')">
+              <div style="height:110px;background:var(--teal-50);display:flex;align-items:center;justify-content:center"><svg width="32" height="32" viewBox="0 0 20 20" fill="none"><path d="M10 2L3.5 5v5.5C3.5 14.5 6.5 17.8 10 18.5c3.5-.7 6.5-4 6.5-8V5L10 2z" fill="#0E9E6E"/><path d="M7 10l2 2 4-4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div style="padding:10px;background:#fff"><div style="font-size:12px;font-weight:500;color:var(--text-1);line-height:1.4">암보험 완벽 가이드</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">12장 · 2026.03</div></div>
+            </div>
+            <div style="border-radius:var(--r-md);overflow:hidden;border:.5px solid var(--border);cursor:pointer" onclick="showToast('카드뉴스 보기')">
+              <div style="height:110px;background:var(--amber-50);display:flex;align-items:center;justify-content:center"><svg width="32" height="32" viewBox="0 0 20 20" fill="none"><path d="M10 2a6 6 0 016 6c0 2.5-1.5 4.7-3.5 5.7V15a.5.5 0 01-.5.5H8a.5.5 0 01-.5-.5v-1.3C5.5 12.7 4 10.5 4 8a6 6 0 016-6z" fill="#F7B731"/><path d="M8 16.5h4M8.5 18h3" stroke="#F7B731" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+              <div style="padding:10px;background:#fff"><div style="font-size:12px;font-weight:500;color:var(--text-1);line-height:1.4">보험료 절약 5가지</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">6장 · 2026.03</div></div>
+            </div>
+            <div style="border-radius:var(--r-md);overflow:hidden;border:.5px solid var(--border);cursor:pointer" onclick="showToast('카드뉴스 보기')">
+              <div style="height:110px;background:var(--gray-50);display:flex;align-items:center;justify-content:center;font-size:30px">👴</div>
+              <div style="padding:10px;background:#fff"><div style="font-size:12px;font-weight:500;color:var(--text-1);line-height:1.4">노후 보험 완벽 정리</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">10장 · 2026.02</div></div>
+            </div>
+            <div style="border-radius:var(--r-md);overflow:hidden;border:.5px solid var(--border);cursor:pointer" onclick="showToast('카드뉴스 보기')">
+              <div style="height:110px;background:#fce4ec;display:flex;align-items:center;justify-content:center;font-size:30px">❤️</div>
+              <div style="padding:10px;background:#fff"><div style="font-size:12px;font-weight:500;color:var(--text-1);line-height:1.4">건강보험 vs 민간보험</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">7장 · 2026.02</div></div>
+            </div>
+            <div style="border-radius:var(--r-md);overflow:hidden;border:.5px solid var(--border);cursor:pointer" onclick="showToast('카드뉴스 보기')">
+              <div style="height:110px;background:#f3e5f5;display:flex;align-items:center;justify-content:center;font-size:30px">🏥</div>
+              <div style="padding:10px;background:#fff"><div style="font-size:12px;font-weight:500;color:var(--text-1);line-height:1.4">치아보험 선택 가이드</div><div style="font-size:10px;color:var(--text-3);margin-top:3px">5장 · 2026.01</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
