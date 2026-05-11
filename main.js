@@ -236,7 +236,25 @@ function showToast(msg) {
 function switchBuilderTab(tab) {
   document.querySelectorAll('.btab').forEach(b => b.classList.remove('on'));
   document.getElementById('bt-'+tab).classList.add('on');
-  if(tab === 'set') showToast('페이지 설정 화면은 다음 버전에서 추가됩니다');
+  const modPanel = document.getElementById('bpanel-mod');
+  const setPanel = document.getElementById('bpanel-set');
+  if(tab === 'mod') {
+    modPanel.style.display = 'contents';
+    setPanel.style.display = 'none';
+  } else {
+    modPanel.style.display = 'none';
+    setPanel.style.display = 'flex';
+  }
+}
+
+function psetToggle(id) {
+  document.getElementById(id).classList.toggle('on');
+}
+
+function selectTheme(el) {
+  document.querySelectorAll('.theme-swatch').forEach(s => { s.style.boxShadow = 'none'; });
+  const color = el.dataset.color;
+  el.style.boxShadow = `0 0 0 2.5px #fff,0 0 0 4.5px ${color}`;
 }
 
 const bldState = {'bld-ins':true,'bld-con':true,'bld-gui':false,'bld-news':false,'bld-evt':false,'bld-ref':false,'bld-sns':true,'bld-ana':false,'bld-calc':false,'bld-claim':false,'bld-mag':false,'bld-yt':false,'bld-insta':false,'bld-sub':false,'bld-rev':false,'bld-faq':false};

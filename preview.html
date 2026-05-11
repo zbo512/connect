@@ -584,6 +584,7 @@ body{
           <div class="btab" id="bt-set" onclick="switchBuilderTab('set')">페이지 설정</div>
         </div>
         <div class="body" id="builder-body" style="padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--gray-100)">
+          <div id="bpanel-mod" style="display:contents">
 
           <!-- 페이지 타입 선택 -->
           <div>
@@ -758,6 +759,77 @@ body{
             </div>
           </div>
           <div style="height:8px"></div>
+          </div><!-- /bpanel-mod -->
+
+          <div id="bpanel-set" style="display:none;flex-direction:column;gap:12px">
+
+            <!-- 페이지 주소 -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;padding:0 2px">페이지 주소</div>
+              <div style="background:#fff;border-radius:var(--r-md);overflow:hidden;padding:16px">
+                <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:8px">페이지 URL</div>
+                <div style="display:flex;align-items:center;border:1.5px solid var(--border-md);border-radius:var(--r-sm);overflow:hidden">
+                  <span style="padding:10px 11px;font-size:13px;color:var(--text-3);background:var(--gray-100);border-right:1px solid var(--border);white-space:nowrap;flex-shrink:0">goodrich.me/</span>
+                  <input type="text" value="김철수" placeholder="슬러그" style="flex:1;border:none;outline:none;padding:10px 12px;font-size:13px;color:var(--text-1);background:#fff;min-width:0">
+                </div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:6px;line-height:1.5">고객과 공유할 내 페이지 주소예요</div>
+              </div>
+            </div>
+
+            <!-- 공개 설정 -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;padding:0 2px">공개 설정</div>
+              <div style="background:#fff;border-radius:var(--r-md);overflow:hidden">
+                <div style="padding:14px 16px;display:flex;align-items:center;gap:12px">
+                  <div style="flex:1">
+                    <div style="font-size:14px;font-weight:500;color:var(--text-1)">페이지 공개</div>
+                    <div style="font-size:12px;color:var(--text-3);margin-top:2px">비공개 시 고객이 페이지에 접근할 수 없어요</div>
+                  </div>
+                  <div class="toggle on" id="pset-public" onclick="psetToggle('pset-public')"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 디자인 -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;padding:0 2px">디자인</div>
+              <div style="background:#fff;border-radius:var(--r-md);overflow:hidden;padding:16px">
+                <div style="font-size:14px;font-weight:500;color:var(--text-1);margin-bottom:12px">테마 컬러</div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap">
+                  <div class="theme-swatch" data-color="#3182F6" onclick="selectTheme(this)" style="width:30px;height:30px;border-radius:50%;background:#3182F6;cursor:pointer;box-shadow:0 0 0 2.5px #fff,0 0 0 4.5px #3182F6"></div>
+                  <div class="theme-swatch" data-color="#00C9A7" onclick="selectTheme(this)" style="width:30px;height:30px;border-radius:50%;background:#00C9A7;cursor:pointer"></div>
+                  <div class="theme-swatch" data-color="#FF6B6B" onclick="selectTheme(this)" style="width:30px;height:30px;border-radius:50%;background:#FF6B6B;cursor:pointer"></div>
+                  <div class="theme-swatch" data-color="#FFBE0B" onclick="selectTheme(this)" style="width:30px;height:30px;border-radius:50%;background:#FFBE0B;cursor:pointer"></div>
+                  <div class="theme-swatch" data-color="#9B59B6" onclick="selectTheme(this)" style="width:30px;height:30px;border-radius:50%;background:#9B59B6;cursor:pointer"></div>
+                  <div class="theme-swatch" data-color="#FF8C00" onclick="selectTheme(this)" style="width:30px;height:30px;border-radius:50%;background:#FF8C00;cursor:pointer"></div>
+                  <div class="theme-swatch" data-color="#6B7684" onclick="selectTheme(this)" style="width:30px;height:30px;border-radius:50%;background:#6B7684;cursor:pointer"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SNS 공유 -->
+            <div>
+              <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;padding:0 2px">SNS 공유</div>
+              <div style="background:#fff;border-radius:var(--r-md);overflow:hidden">
+                <div style="padding:16px">
+                  <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:8px">페이지 제목</div>
+                  <input type="text" value="김철수 보험설계사 | 굿리치" placeholder="페이지 제목 입력" style="width:100%;border:1.5px solid var(--border-md);border-radius:var(--r-sm);padding:10px 12px;font-size:13px;color:var(--text-1);background:#fff;box-sizing:border-box;outline:none">
+                  <div style="font-size:11px;color:var(--text-3);margin-top:6px;line-height:1.5">카카오·인스타 공유 시 표시되는 제목이에요</div>
+                </div>
+                <div style="margin:0 16px;height:.5px;background:var(--border)"></div>
+                <div style="padding:16px">
+                  <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:8px">공유 이미지</div>
+                  <div onclick="showToast('이미지 업로드는 실제 서비스에서 지원됩니다')" style="border:1.5px dashed var(--border-md);border-radius:var(--r-sm);padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;background:var(--gray-100)">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="8" fill="#E5E8EB"/><path d="M8 21l5-9 5 9" stroke="#8B95A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="12" r="2" fill="#8B95A1"/></svg>
+                    <div style="font-size:13px;font-weight:500;color:var(--text-2)">이미지 추가</div>
+                    <div style="font-size:11px;color:var(--text-3)">1200 × 630px 권장 · JPG, PNG</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="height:8px"></div>
+          </div><!-- /bpanel-set -->
         </div>
         <div class="tab-bar">
           <div class="tab" onclick="go('s-workspace','대시보드','builder')"><div class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2.5L3 9.5V21h6v-6h6v6h6V9.5L12 2.5z" fill="currentColor"/></svg></div><div class="tab-label">홈</div></div>
@@ -2491,7 +2563,25 @@ function showToast(msg) {
 function switchBuilderTab(tab) {
   document.querySelectorAll('.btab').forEach(b => b.classList.remove('on'));
   document.getElementById('bt-'+tab).classList.add('on');
-  if(tab === 'set') showToast('페이지 설정 화면은 다음 버전에서 추가됩니다');
+  const modPanel = document.getElementById('bpanel-mod');
+  const setPanel = document.getElementById('bpanel-set');
+  if(tab === 'mod') {
+    modPanel.style.display = 'contents';
+    setPanel.style.display = 'none';
+  } else {
+    modPanel.style.display = 'none';
+    setPanel.style.display = 'flex';
+  }
+}
+
+function psetToggle(id) {
+  document.getElementById(id).classList.toggle('on');
+}
+
+function selectTheme(el) {
+  document.querySelectorAll('.theme-swatch').forEach(s => { s.style.boxShadow = 'none'; });
+  const color = el.dataset.color;
+  el.style.boxShadow = `0 0 0 2.5px #fff,0 0 0 4.5px ${color}`;
 }
 
 const bldState = {'bld-ins':true,'bld-con':true,'bld-gui':false,'bld-news':false,'bld-evt':false,'bld-ref':false,'bld-sns':true,'bld-ana':false,'bld-calc':false,'bld-claim':false,'bld-mag':false,'bld-yt':false,'bld-insta':false,'bld-sub':false,'bld-rev':false,'bld-faq':false};
@@ -3038,33 +3128,5 @@ document.addEventListener('input', function(e) {
   if(['cl-name','cl-rn1','cl-rn2'].includes(e.target.id)) updateClNextBtn();
 });
 
-</script>
-<style>
-/* Auto Mobile View (for screens smaller than 768px) */
-@media (max-width: 767px) {
-  body { background:#fff !important; padding:0 !important; display:block !important; }
-  .shell { width:100% !important; margin:0 !important; }
-  .shell-label { display:none !important; }
-  .phone { background:none !important; border-radius:0 !important; padding:0 !important; box-shadow:none !important; }
-  .screen-wrap { border-radius:0 !important; height:100dvh !important; }
-  .status { display:none !important; }
-  .flowmap { display:none !important; }
-}
-</style>
-<script>
-/* Force Mobile View via ?mobile query string */
-if (location.search.includes('mobile')) {
-  const s = document.createElement('style');
-  s.textContent = `
-    body { background:#fff !important; padding:0 !important; display:block !important; }
-    .shell { width:100% !important; margin:0 !important; }
-    .shell-label { display:none !important; }
-    .phone { background:none !important; border-radius:0 !important; padding:0 !important; box-shadow:none !important; }
-    .screen-wrap { border-radius:0 !important; height:100dvh !important; }
-    .status { display:none !important; }
-    .flowmap { display:none !important; }
-  `;
-  document.head.appendChild(s);
-}
 </script>
 </body>
