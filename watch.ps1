@@ -5,7 +5,7 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $enc  = [System.Text.Encoding]::UTF8
 
-function Build-Preview {
+function Invoke-BuildPreview {
     $template = [System.IO.File]::ReadAllText("$root\_template.html", $enc)
 
     # 1. base.css → <style> 인라인
@@ -82,7 +82,7 @@ if (location.search.includes('mobile')) {
 
 # -- Initial build
 Write-Host "Building..."
-Build-Preview
+Invoke-BuildPreview
 
 # -- FileSystemWatcher setup
 # Detects Changed + Renamed + Created (VS Code saves via rename)
@@ -125,5 +125,5 @@ while ($true) {
 
     # Wait for VS Code rename-save to complete
     Start-Sleep -Milliseconds 150
-    Build-Preview
+    Invoke-BuildPreview
 }

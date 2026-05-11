@@ -36,7 +36,9 @@ function go(id, label, from) {
   document.getElementById(id).classList.add('active');
   document.getElementById('shell-label').textContent = screenLabels[id] || label;
   const custFnav = document.getElementById('cust-fnav');
-  if(custFnav) custFnav.style.pointerEvents = (id === 's-customer') ? 'all' : 'none';
+  if(custFnav) {
+    custFnav.style.display = (id === 's-customer') ? 'flex' : 'none';
+  }
   updateFlowMap();
   if(id === 's-claim') setTimeout(() => { if(typeof clShowOnly==='function') clShowOnly('claim-landing'); }, 10);
   if(id === 's-notify') setTimeout(updateNotifyCount, 10);
